@@ -1,3 +1,6 @@
+# Workshop, this is about JS (ES5, ES6), VanillaJS, Babel, Webpack, VueJS, FP .... and more!
+
+
 ## Values & Types
 
 JavaScript has typed values, not typed variables. The following built-in types are available:
