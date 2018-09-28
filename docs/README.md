@@ -30,7 +30,7 @@
 + [Computed Property Names](#computed-property-names)
 + [Default function parameters](#default-function-parameters)
 + [Promises](#promises)
-+ [Async and await](#async and await)
++ [Async and await](#async-and-await)
 + [Modules on JS](#modules-on-js)
 + [Common JS](#common-js)
 + [ES6 Modules](#es6-modules)
