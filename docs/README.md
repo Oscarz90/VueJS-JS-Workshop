@@ -340,3 +340,793 @@ var el = document.getElementByID("foo");
 ```
 
 The `document` variable exits as a global variable when your code is running in a browser. It's not provided by the JS engine, nor is it particularly controlled by the JavaScript specification. Ittakes the form of something that looks an awful lot like a normal JS object, but it's not really exactly that. It's a special object, often called a "host object"
+
+## ES6
+
+### Constants
+
+Support for constants (also known as "immutable variables"), i.e., variables which cannot be re-assigned new content. Notice: this only makes the variable itself immutable, not its assigned content (for instance, in case the content is an object, this means the object itself can still be altered).
+
+```js
+const PI = 3.141593;
+
+console.log(PI)
+//3.141593
+
+PI = 1234;
+//TypeError: Assignment to constant variable.
+
+```
+
+### Let 
+
+Block-scoped variables (and constants) without hoisting.
+
+Using var
+
+```js
+function test(){
+  var a = "Hello!"
+  if(true){
+    var a = "Nope!"
+    console.log(a);
+  }  
+  console.log(a);
+}
+
+test();
+//Nope!
+//Nope!
+```
+
+Using let
+
+```js
+function test(){
+  let a = "Hello!"
+  if(true){
+    let a = "Nope!"
+    console.log(a);
+  }  
+  console.log(a);
+}
+
+test();
+//Nope!
+//Hello!
+```
+
+### Arrow functions
+
+Arrow functions are shorthand for an anonymous function that keep the current context.
+
+Lexical `this`
+
+```js
+//ES5
+function Person(name, age){
+  this.name = name;
+  this.age = age;
+  setTimeout(function(){
+    console.log(this.name + " is "+ this.age +" years old")
+  })
+}
+var juan = new Person("Juan",30);
+//undefined is undefined
+```
+
+The Old Solution (not the best solution of course, poor solution, **low js skills**)
+
+```js
+//ES5
+function Person(name, age){
+  //Save the context within a variable
+  var self = this;
+
+  self.name = name;
+  self.age = age;
+  setTimeout(function(){
+    console.log(self.name + " is "+ self.age+" years old")
+  })
+};
+
+var juan = new Person("Juan",30);
+//Juan is 30 years old
+```
+
+The Old Solution
+
+```js
+function Person(name, age){
+  this.name = name;
+  this.age = age;
+  
+  setTimeout(function(){
+    console.log(this.name + " is "+ this.age+" years old")
+  }.bind(this))
+};
+
+var juan = new Person("Juan",30);
+//Juan is 30 years old
+```
+
+With **arrow functions**
+
+```js
+function Person(name, age){
+  this.name = name;
+  this.age = age;
+
+  setTimeout(()=>{
+    console.log(this.name + " is "+ this.age+" years old")
+  })
+};
+
+var juan = new Person("Juan",30);
+//Juan is 30 years old
+```
+
+Arrow functions with **One parameter**
+
+```js
+//ES5's functions
+function increment(a){
+  return a++
+}
+
+//Arrow function
+const increment = a =>a++
+```
+
+Arrow functions with **Two parameter**
+
+```js
+//ES5's functions
+function sumTwoNumbers(a,b){
+  return a+b;
+}
+
+//Arrow function
+const sumTwoNumbers = (a,b)=>a+b
+```
+
+Arrow functions with **Body**
+
+```js
+//ES5's functions
+function doubleNumbers(numberList){
+  return numberList.map(function(number){
+    return number*2
+  })
+}
+
+//Arrow function
+const sumTwoNumbers = (a,b)=>{
+  return numberList.map(number=>number*2)
+}
+
+//Function refactored
+const sumTwoNumbers = (a,b)=>numberList.map(number=>number*2)
+```
+
+## Classes
+
+Class syntax has been added to ES6. The underlying inheritance model is still prototypal but the class syntax can make it easier to reason about relationships. To create a class just use the class keyword. Classes can be created with class expressions or class declarations. Unlike function declarations, class declarations are not hoisted.
+
+```js
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+
+  get color() {
+    return this._color;
+  }
+
+  set color(c) {
+    this._color = c;
+  }
+
+  // Read only property
+  get dimensions() {
+    return `height: ${this.height}, width: ${this.width}`;
+  }
+
+  static area(rectangle) {
+    return rectangle.width * rectangle.height;
+  }
+}
+
+class Square extends Rectangle {
+  constructor(width) {
+    super(width, width);
+  }
+}
+
+const s = new Square(10);
+
+console.log(s.width);
+
+console.log(s.dimensions);
+
+console.log(Rectangle.area(s));
+```
+
+## Concise methods and Object Literals
+
+In object literals and classes we can condense render: function () {} to render()
+
+The old way
+```js
+const foo = function(){
+  return "foo"
+};
+const a = "a";
+const obj = {
+  foo:foo
+  , a:a
+  , getTite:function(){
+    return "The title is "+ this.a;
+  }
+}
+```
+
+Concise methods
+```js
+const foo = function () {
+  return "foo"
+};
+
+const a = "a";
+
+const obj = {
+  foo,
+  a,
+  getTitle() {
+    return `The title is ${this.a}`;
+  }
+};
+
+console.log(obj.foo());
+console.log(obj.a);
+console.log(obj.getTitle());
+```
+
+### Destructing
+
+Both arrays and objects now support destructuring.
+
+Array destructuring gives a quicker and more fine-grained approach to interacting with elements in an array. See below:
+
+Old way
+```js
+const user = {
+  name:"Elon"
+  , lastName:"Musk"
+};
+ const name = user.name;
+ const lastName = user.lastName;
+
+const names = ["Elon", "Justin", "Joe"];
+const firstName = names[0]
+const thirdName = names[2]
+```
+
+Using destructing
+```js
+const user = {
+  name:"Elon"
+  , lastName:"Musk"
+  , permissions:{
+    read:true
+    , write:false
+    , execute:false
+  }
+};
+const {name, lastName, age=0} = user;
+console.log(name) //Elon
+//assign a new variable name
+const {name:userName} = user;
+console.log(userName) //Elon
+//Nested destructing
+const {permissions:{read, write:writePermission}} = user;
+console.log(read) // true
+console.log(writePermission) // true
+
+const names = ["Elon", "Justin", "Joe"];
+const [firstName, ,thirdName] = names;
+```
+
+## Spread Operator
+
+Spreading of elements of an iterable collection (like an array or even a string) into both literal elements and individual function parameters.
+
+```js
+const foo = [1,2,3];
+const fooSecond = [4,5,6];
+
+const allFoo = [...foo, ...fooSecond]; //[ 1, 2, 3, 4, 5, 6 ]
+
+function sumThreeNumbers(first,second,third){
+  return first + second + third;
+}
+const parameters = [1,2,3];
+
+//Using apply (ES5 Function)
+sumThreeNumbers.apply(undefined, parameters)
+
+//Using Spread Operator
+sumThreeNumbers(...parameters);
+
+//Creating objects
+const obj = {
+  prop1:"1"
+  prop2:"2"
+  prop3:"3"
+}
+
+const objb = {
+  prop4:"4"
+  prop5:"5"
+  prop6:"6"
+}
+
+const objc = {
+  ...obj
+  , ...objb
+}
+
+console.log(objc);
+/*
+{ prop1: '1',
+  prop2: '2',
+  prop3: '3',
+  prop4: '4',
+  prop5: '5',
+  prop6: '6' }
+*/
+```
+
+### String Interpolation
+
+Intuitive expression interpolation for single-line and multi-line strings. (Notice: don't be confused, Template Literals were originally named "Template Strings" in the drafts of the ECMAScript 6 language specification)
+
+```js
+const user ={
+  name:"Elon"
+  , lastName:"Musk"
+}
+//Old way
+console.log("The user "+ user.name+" "+user.lastName+" is wonderful")
+
+//Using String Templates
+console.log(`The user ${user.name} ${user.lastName} is wonderful`)
+
+console.log(`The person ${user.name}
+wants to build rockets and launch 
+them to Mars`)
+
+```
+
+### Computed Property Names
+
+```js
+function person({name, lastName, age}){
+  function completeName(){
+    return `${name}Age`
+  }
+  return {
+    name
+    , lastName
+    , age
+    , [completeName()]:age
+  }
+}
+
+
+const user = {
+  name:"Elon"
+  , lastName:"Martinez"
+  , age:27
+}
+
+
+console.log(person(user))
+/*
+{ name: 'Elon',
+  lastName: 'Martinez',
+  age: undefined,
+  ElonAge: undefined }
+*/
+```
+
+## Default function parameters
+
+```js
+function sum(a, b = 0, c = 0) {
+    return a + b + c
+}
+console.log(sum(3)) //3
+```
+
+## Promises
+
+Promises give us a way to handle asynchronous processing in a more synchronous fashion. They represent a value that we can handle at some point in the future. And, better than callbacks here, Promises give us guarantees about that future value, specifically:
+
+No other registered handlers of that value can change it (the Promise is immutable)
+We are guaranteed to receive the value, regardless of when we register a handler for it, even if it's already resolved (in contrast to events, which can incur race conditions).
+
+```js
+const message = ()=>new Promise((resolve,reject)=>{
+  setTimeout(()=> resolve("Hello"), 1000)
+})
+
+const name = ()=>new Promise((resolve,reject)=>{
+  setTimeout(()=> resolve("Elon !"), 1000)
+})
+//Solving a promise
+message()
+  .then(responsePromiseOne=>{
+    name().then(responsePromiseTwo=>{
+      console.log(`${responsePromiseOne} ${responsePromiseTwo}`)
+    })
+  })
+//Hello Elon !
+
+//Rejecting a promise
+const wantToBeMyGirlfriend = ()=>new Promise((resolve,reject)=>{
+  setTimeout(()=>reject("noooppee!"), 3000)
+})
+
+wantToBeMyGirlfriend()
+  .then(response=>{
+    console.log(response)
+  })
+  .catch(error=>{
+    console.error(error)
+  })
+//noooppee!
+```
+
+A Promise itself has one of the following three states:
+
+* Pending - until a Promise is fulfilled it is in pending state
+* Fulfilled - when the first handler is called the Promise is considered fulfilled with the value passed to that handler.
+* Rejected - if the second handler is called, the Promise is considered rejected with the value passed to that handler.
+
+Promise All
+
+```js
+const p1 = Promise.resolve(3); //3
+const p2 = 1337; //1337
+const p3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, "foo");
+}); //"foo"
+
+Promise.all([p1, p2, p3]).then(values => { 
+  console.log(values); // [3, 1337, "foo"] 
+});
+```
+
+## Async/await
+
+There’s a special syntax to work with promises in a more comfort fashion, called “async/await”. It’s surprisingly easy to understand and use.
+
+```js
+const message = ()=>new Promise((resolve,reject)=>{
+  setTimeout(()=> resolve("Hello"), 1000)
+})
+
+const name = ()=>new Promise((resolve,reject)=>{
+  setTimeout(()=> resolve("Elon !"), 1000)
+})
+
+//Consuming promises using async and await function
+async function getMessage(){
+  try{
+    console.log(`${await message()} ${await name()}`)
+  }catch(error){
+    console.error(error)
+  }
+  
+}
+getMessage();
+//Hello Elon !
+```
+
+### Modules on JS
+
+### Common JS
+
+Modules are the fundamental building blocks of the code structure. The module system allows you to organize your code, hide information and only expose the public interface of a component using module.exports. Every time you use the require call, you are loading another module.
+
+```js
+// add.js
+function add (a, b) {
+  return a + b
+}
+
+module.exports = add
+```
+
+To use the add module we have just created, we have to require it.
+
+```js
+// index.js
+const add = require('./add')
+
+console.log(add(4, 5))
+//9
+```
+
+### ES6 Modules
+
+The goal for ECMAScript 6 modules was to create a format that both users of CommonJS and of AMD are happy with:
+
+Similar to CommonJS, they have a compact syntax, a preference for single exports and support for cyclic dependencies.
+Similar to AMD, they have direct support for asynchronous loading and configurable module loading.
+Being built into the language allows ES6 modules to go beyond CommonJS and AMD (details are explained later):
+
+Their syntax is even more compact than CommonJS’s.
+Their structure can be statically analyzed (for static checking, optimization, etc.).
+Their support for cyclic dependencies is better than CommonJS’s.
+The ES6 module standard has two parts:
+
+Declarative syntax (for importing and exporting)
+Programmatic loader API: to configure how modules are loaded and to conditionally load modules
+
+```js
+//------ lib.js ------
+export const sqrt = Math.sqrt;
+export function square(x) {
+    return x * x;
+}
+export function diag(x, y) {
+    return sqrt(square(x) + square(y));
+}
+
+//------ main.js ------
+import { square, diag } from 'lib';
+console.log(square(11)); // 121
+console.log(diag(4, 3)); // 5
+
+//Exports everything
+//------ main.js ------
+import * as lib from 'lib';
+console.log(lib.square(11)); // 121
+console.log(lib.diag(4, 3)); // 5
+
+//Default exports (one per module) 
+//------ myFunc.js ------
+export default function () { ... };
+
+//------ main1.js ------
+import myFunc from 'myFunc';
+myFunc();
+```
+
+## Functional Programming
+
+### Declarative vs Imperative Coding Style (FP)
+
+We are going to switch our mindset. From here on out, we'll stop telling the computer how to do its job and instead write a specification of what we'd like as a result. I'm sure you'll find it much less stressful than trying to micromanage everything all the time.
+
+Declarative, as opposed to imperative, means that we will write expressions, as opposed to step by step instructions.
+
+Think of SQL. There is no "first do this, then do that". There is one expression that specifies what we'd like from the database. We don't decide how to do the work, it does. When the database is upgraded and the SQL engine optimized, we don't have to change our query. This is because there are many ways to interpret our specification and achieve the same result.
+
+```js
+// imperative
+const makes = [];
+for (let i = 0; i < cars.length; i += 1) {
+  makes.push(cars[i].make);
+}
+
+// declarative
+const makes = cars.map(car => car.make);
+```
+
+Other Example
+
+```js
+// imperative
+const authenticate = (form) => {
+  const user = toUser(form);
+  return logIn(user);
+};
+
+// declarative
+const authenticate = compose(logIn, toUser);
+```
+
+### First class functions
+
+When we say functions are "first class", we mean they are just like everyone else... so in other words a normal class. We can treat functions like any other data type and there is nothing particularly special about them - they may be stored in arrays, passed around as function parameters, assigned to variables, and what have you.
+
+```js
+const hi = name => `Hi ${name}`;
+const greeting = name => hi(name);
+```
+
+```js
+httpGet('/post/2', json => renderPost(json));
+// go back to every httpGet call in the application and explicitly pass err along.
+httpGet('/post/2', (json, err) => renderPost(json, err));
+// renderPost is called from within httpGet with however many arguments it wants
+httpGet('/post/2', renderPost);
+```
+
+### Pure Functions
+
+A pure function is a function which:
+
++ Given the same input, will always return the same output.
++ Produces no side effects.
++ Doesn't mutate Object's State (Immutability)
+
+Consider the next examples
+
+```js
+// impure (is sharing state the minimum variable)
+let minimum = 21;
+const checkAge = age => age >= minimum;
+
+// pure
+const checkAge = (age) => {
+  const minimum = 21;
+  return age >= minimum;
+};
+```
+
+```js
+// impure (is mutating data)
+let values = [1,2,3,4];
+const sum10 = list => {
+  for(let counter=0;counter<list.length;counter++)
+    list[counter]+=10
+  return list
+};
+console.log(sum10(values))
+console.log(values)
+/*
+[ 11, 12, 13, 14 ]
+[ 11, 12, 13, 14 ]
+*/
+
+// pure (it doesn't mutate the out state)
+let values = [1,2,3,4];
+const sum10 = list=>{
+  const temp = [...list];
+  for(let counter=0;counter<temp.length;counter++)
+  temp[counter]+=10
+  return temp
+}
+/*
+[ 11, 12, 13, 14 ]
+[ 1, 2, 3, 4 ]
+*/
+
+//ES6 and its pure functions to the rescue
+let values = [1,2,3,4];
+const sum10 = list=>list.map((value,index)=>value+10)
+console.log(sum10(values))
+console.log(values)
+/*
+[ 11, 12, 13, 14 ]
+[ 1, 2, 3, 4 ]
+*/
+```
+
+### High Order Functions (FP)
+
+High Order Functions
+
+A higher order function is a function that takes a function as an argument, or returns a function. Higher order function is in contrast to first order functions, which don’t take a function as an argument or return a function as output.
+
+Duplicate the values of an array
+```js
+const values = [2,3,4];
+//First class function
+const doubleValue=value=>value*2;
+
+const duplicateList = list=>list.map(doubleValue);
+console.log(duplicateList(values))// [ 4, 6, 8 ]
+/*
+  const duplicateList = list=>list.map(value=>value*2);
+*/
+```
+
+### Currying
+
+The concept is simple: You can call a function with fewer arguments than it expects. It returns a function that takes the remaining arguments.
+
+```js
+const add = x => y => x + y;
+/*
+function add(x){
+  return function(y){
+    return x+y
+  }
+}
+*/
+const increment = add(1);
+const addTen = add(10);
+
+increment(2); // 3
+addTen(2); // 12
+
+//Example 2
+const splitBy = simbol => string=>string.split(simbol)
+const splitBySpace = splitBy(" ");
+const splitByComma = splitBy(",");
+
+console.log(splitBySpace("hello guys"));
+//[ 'hello', 'guys' ]
+const words = splitBySpace;
+console.log(words("this should be separate"));
+//[ 'this', 'should', 'be', 'separate' ]
+const getCVSValues = splitByComma;
+console.log(getCVSValues("value1,value2,value3"));
+//[ 'value1', 'value2', 'value3' ]
+```
+
+### Composed Functions
+
+The composition of two functions returns a new function. This makes perfect sense: composing two units of some type (in this case function) should yield a new unit of that very type. You don't plug two legos together and get a lincoln log. There is a theory here, some underlying law that we will discover in due time.
+
+In our definition of compose, the g will run before the f, creating a right to left flow of data. 
+
+This is much more readable than nesting a bunch of function calls. Without compose, the above would read:
+```js
+const compose = (f, g) => x => f(g(x));
+
+const toUpperCase = x => x.toUpperCase();
+const exclaim = x => `${x}!`;
+const shout = compose(exclaim, toUpperCase);
+//const shout = x => exclaim(toUpperCase(x));
+console.log(shout('send in the clowns')); // "SEND IN THE CLOWNS!"
+```
+
+```js
+const compose = (f, g) => x => f(g(x));
+/*
+const compose = function(fcnOne, fcnTwo){
+  return function(parameter){
+    return fcnOne(fcnTwo(parameter))
+  }
+}
+*/
+const splitBy = simbol => string=>string.split(simbol)
+const splitBySpace = splitBy(" ");
+const splitByComma = splitBy(",");
+
+const response = "oscar martinez,walter maidub,eduardo ramirez";
+
+//const map = (fcn,list)=>list.map(fcn)
+//Currying
+const map = fcn=>list=>list.map(fcn)
+
+const getUsersData = compose(map(splitBySpace),splitByComma);
+
+console.log(getUsersData(response))
+/*
+[ [ 'oscar', 'martinez' ],
+  [ 'walter', 'maidub' ],
+  [ 'eduardo', 'ramirez' ] ]
+*/
+
+```
+
+## Nodejs
+
+asdf
+
+### What is NodeJS?
+
+Node.js is a JavaScript runtime environment. But what is that, one might ask. By run-time environment, the infrastructure to build and run software applications is meant. To build applications in JavaScript, in this case. Let’s see what are the Node.js definition versions.
+
+The company itself describes Node.js as a “JavaScript runtime built on "**Chrome V8 engine**". Wikipedia states, that “Node.js is an open-source and cross-platform environment to execute code”. According to TechTarget, it is 
+"a development platform aimed at building server-side applications". And PCMag tells us that Node.js is “a platform with its own web server for better control”. That is certainly enough to grasp the main idea.
+
+### What is NPM?
