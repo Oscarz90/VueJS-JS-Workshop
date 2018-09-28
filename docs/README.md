@@ -1120,7 +1120,9 @@ console.log(getUsersData(response))
 
 ## Modern JavaScript Explained For Dinosaurs
 
-![alt text](img/dinosaurs.png "Logo Title Text 1")
+![Dinosaurs Everywhere](img/dinosaurs.png "Logo Title Text 1")
+
+![Dinosaurs Everywhere](img/dontdoit.jpg "Logo Title Text 1")
 
 ## Nodejs
 
@@ -1551,5 +1553,9 @@ Retrieve DOM element by ID
 ```
 
 [TODO App](../VanillaJS/src/index.html)  
+
+[TODO App - VanillaJS](http://todomvc.com/examples/vanillajs)
+
+[TODO App - Vanilla ES6](http://todomvc.com/examples/vanilla-es6)
 
 
