@@ -1,4 +1,4 @@
-# Workshop, this is about JS (ES5, ES6), VanillaJS, Babel, Webpack, VueJS, FP .... and more!
+# Workshop, this is about JS (ES5, ES6), VanillaJS, Babel, Webpack, VueJS, NodeJS, NPM, FP .... and more!
 
 ### Table of Contents
 
