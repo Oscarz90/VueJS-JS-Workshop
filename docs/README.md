@@ -1,5 +1,53 @@
 # Workshop, this is about JS (ES5, ES6), VanillaJS, Babel, Webpack, VueJS, FP .... and more!
 
+### Table of Contents
+
++ [Values & Types](#values-&-types)
++ [Coercion](#coercion)
++ [Truthly & Falsy](#truthly-&-falsy)
++ [Equality](#equality)
++ [Inequality](#inequality)
++ [Hoisting](#hoisting)
++ [Strict Mode](#strict-mode)
++ [Functions Scope and as Values](#functions-scope-and-as-values)
++ [Immediately Invoked Function Expressions (IIFEs)](#immediately-invoked-function-expressions-(iifes))
++ [Closure ](#closure-)
++ [this Identifier](#this-identifier)
++ [Prototypes](#prototypes)
++ [Old & New (ES5 & ES6)](#old-&-new-(es5-&-es6))
++ [Polyfilling](#polyfilling)
++ [Transpiling](#transpiling)
++ [Non-Javascript](#non-javascript)
++ [ES6](#es6)
++ [Constants](#constants)
++ [Let ](#let-)
++ [Arrow functions](#arrow-functions)
++ [Classes](#classes)
++ [Concise methods and Object Literals](#concise-methods-and-object-literals)
++ [Destructing](#destructing)
++ [Spread Operator](#spread-operator)
++ [String Interpolation](#string-interpolation)
++ [Computed Property Names](#computed-property-names)
++ [Default function parameters](#default-function-parameters)
++ [Promises](#promises)
++ [Async/await](#async/await)
++ [Modules on JS](#modules-on-js)
++ [Common JS](#common-js)
++ [ES6 Modules](#es6-modules)
++ [Functional Programming](#functional-programming)
++ [Declarative vs Imperative Coding Style (FP)](#declarative-vs-imperative-coding-style-(fp))
++ [First class functions](#first-class-functions)
++ [Pure Functions](#pure-functions)
++ [High Order Functions (FP)](#high-order-functions-(fp))
++ [Currying](#currying)
++ [Composed Functions](#composed-functions)
++ [Modern JavaScript Explained For Dinosaurs](#modern-javascript-explained-for-dinosaurs)
++ [Nodejs](#nodejs)
++ [What is NodeJS?](#what-is-nodejs?)
++ [What is NPM?](#what-is-npm?)
++ [NPM Tools](#npm-tools)
++ [Babel](#babel)
++ [Webpack](#webpack)
 
 ## Values & Types
 
@@ -66,6 +114,8 @@ console.log(obj[b]); // "hello world"
 console.log(obj["b"]); // 42
 ```
 
+**[Back to top](#table-of-contents)**
+
 ## Coercion
 
 + Explicit coercion  
@@ -75,6 +125,8 @@ console.log(obj["b"]); // 42
   `"999.99" == 999.999`
 
   Implicit coercion is a mechanism that can be learned, and moreover should be learned by anyone wishin to take JavaScript programming seriously!
+
+**[Back to top](#table-of-contents)**
 
 ### Truthly & Falsy
 
@@ -89,6 +141,8 @@ The specific list of "falsy" values in JavaScript is as follows:
 
 An value that's not on this "falsy" list is "truthy"
 
+**[Back to top](#table-of-contents)**
+
 ### Equality
 
 There are four equality operators:
@@ -102,6 +156,8 @@ There are four equality operators:
 console.log("49"===49) // false, Coercion is not allowed
 console.log("49"==49) // true
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Inequality
 
@@ -118,6 +174,8 @@ var c = "43";
 console.log(a < b) // true
 console.log(b < c) // true
 ```
+
+**[Back to top](#table-of-contents)**
 
 ## Hoisting
 
@@ -137,6 +195,8 @@ function foo(){
 console.log(a); // 2
 
 ```
+
+**[Back to top](#table-of-contents)**
 
 ## Strict Mode
 
@@ -163,6 +223,8 @@ foo();
 
 ```
 
+**[Back to top](#table-of-contents)**
+
 ## Functions Scope and as Values
 
 
@@ -180,6 +242,8 @@ var x = function bar(){
   //..
 }
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Immediately Invoked Function Expressions (IIFEs)
 
@@ -216,6 +280,8 @@ var a = 42;
 console.log(a); // 42
 ```
 
+**[Back to top](#table-of-contents)**
+
 ### Closure 
 
 You can think of closure as a way to "remember" and continue to access a function's scope (its variables) even once the function has finished running.
@@ -233,6 +299,8 @@ function makeAdder(x){
   return add:
 }
 ```
+
+**[Back to top](#table-of-contents)**
 
 ## this Identifier
 
@@ -266,6 +334,8 @@ foo.call(obj2); // "obj2", what does it do call function of an object?
 new foo(); // undefined
 ```
 
+**[Back to top](#table-of-contents)**
+
 ## Prototypes
 
 When you reference a property on an object, if that property doesn't exist, JavaScript will automatically use that object's internal prototype reference to find another object to look for the property on.
@@ -286,6 +356,8 @@ This linkage may seem like a strange feature of the language. The most common wa
 
 (a more natural way of applying prototypes is a pattern called "behavior delegation", where you linked objects to be able to delegate from one to the other for parts of the needed behavior)
 
+**[Back to top](#table-of-contents)**
+
 ## Old & New (ES5 & ES6)
 
 ### Polyfilling
@@ -299,6 +371,8 @@ if(!Number.isNaN){
   }
 }
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Transpiling
 
@@ -332,6 +406,8 @@ Here are some good options:
 + Babel (Transpiles ES6+ into ES5)
 + Traceur (Transpiles ES6, ES7,and beyond into ES5)
 
+**[Back to top](#table-of-contents)**
+
 ## Non-Javascript
 
 
@@ -343,6 +419,8 @@ var el = document.getElementByID("foo");
 ```
 
 The `document` variable exits as a global variable when your code is running in a browser. It's not provided by the JS engine, nor is it particularly controlled by the JavaScript specification. Ittakes the form of something that looks an awful lot like a normal JS object, but it's not really exactly that. It's a special object, often called a "host object"
+
+**[Back to top](#table-of-contents)**
 
 ## ES6
 
@@ -360,6 +438,8 @@ PI = 1234;
 //TypeError: Assignment to constant variable.
 
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Let 
 
@@ -398,6 +478,8 @@ test();
 //Nope!
 //Hello!
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Arrow functions
 
@@ -512,6 +594,8 @@ const sumTwoNumbers = (a,b)=>{
 const sumTwoNumbers = (a,b)=>numberList.map(number=>number*2)
 ```
 
+**[Back to top](#table-of-contents)**
+
 ## Classes
 
 Class syntax has been added to ES6. The underlying inheritance model is still prototypal but the class syntax can make it easier to reason about relationships. To create a class just use the class keyword. Classes can be created with class expressions or class declarations. Unlike function declarations, class declarations are not hoisted.
@@ -556,6 +640,8 @@ console.log(s.dimensions);
 console.log(Rectangle.area(s));
 ```
 
+**[Back to top](#table-of-contents)**
+
 ## Concise methods and Object Literals
 
 In object literals and classes we can condense render: function () {} to render()
@@ -595,6 +681,8 @@ console.log(obj.foo());
 console.log(obj.a);
 console.log(obj.getTitle());
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Destructing
 
@@ -640,6 +728,8 @@ console.log(writePermission) // true
 const names = ["Elon", "Justin", "Joe"];
 const [firstName, ,thirdName] = names;
 ```
+
+**[Back to top](#table-of-contents)**
 
 ## Spread Operator
 
@@ -691,6 +781,8 @@ console.log(objc);
 */
 ```
 
+**[Back to top](#table-of-contents)**
+
 ### String Interpolation
 
 Intuitive expression interpolation for single-line and multi-line strings. (Notice: don't be confused, Template Literals were originally named "Template Strings" in the drafts of the ECMAScript 6 language specification)
@@ -711,6 +803,8 @@ wants to build rockets and launch
 them to Mars`)
 
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Computed Property Names
 
@@ -744,6 +838,8 @@ console.log(person(user))
 */
 ```
 
+**[Back to top](#table-of-contents)**
+
 ## Default function parameters
 
 ```js
@@ -752,6 +848,8 @@ function sum(a, b = 0, c = 0) {
 }
 console.log(sum(3)) //3
 ```
+
+**[Back to top](#table-of-contents)**
 
 ## Promises
 
@@ -811,6 +909,7 @@ Promise.all([p1, p2, p3]).then(values => {
   console.log(values); // [3, 1337, "foo"] 
 });
 ```
+**[Back to top](#table-of-contents)**
 
 ## Async/await
 
@@ -838,6 +937,8 @@ getMessage();
 //Hello Elon !
 ```
 
+**[Back to top](#table-of-contents)**
+
 ### Modules on JS
 
 ### Common JS
@@ -862,6 +963,8 @@ const add = require('./add')
 console.log(add(4, 5))
 //9
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### ES6 Modules
 
@@ -909,6 +1012,8 @@ import myFunc from 'myFunc';
 myFunc();
 ```
 
+**[Back to top](#table-of-contents)**
+
 ## Functional Programming
 
 ### Declarative vs Imperative Coding Style (FP)
@@ -943,6 +1048,8 @@ const authenticate = (form) => {
 const authenticate = compose(logIn, toUser);
 ```
 
+**[Back to top](#table-of-contents)**
+
 ### First class functions
 
 When we say functions are "first class", we mean they are just like everyone else... so in other words a normal class. We can treat functions like any other data type and there is nothing particularly special about them - they may be stored in arrays, passed around as function parameters, assigned to variables, and what have you.
@@ -959,6 +1066,8 @@ httpGet('/post/2', (json, err) => renderPost(json, err));
 // renderPost is called from within httpGet with however many arguments it wants
 httpGet('/post/2', renderPost);
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Pure Functions
 
@@ -1021,6 +1130,8 @@ console.log(values)
 */
 ```
 
+**[Back to top](#table-of-contents)**
+
 ### High Order Functions (FP)
 
 High Order Functions
@@ -1039,6 +1150,8 @@ console.log(duplicateList(values))// [ 4, 6, 8 ]
   const duplicateList = list=>list.map(value=>value*2);
 */
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Currying
 
@@ -1073,6 +1186,8 @@ const getCVSValues = splitByComma;
 console.log(getCVSValues("value1,value2,value3"));
 //[ 'value1', 'value2', 'value3' ]
 ```
+
+**[Back to top](#table-of-contents)**
 
 ### Composed Functions
 
@@ -1121,6 +1236,8 @@ console.log(getUsersData(response))
 
 ```
 
+**[Back to top](#table-of-contents)**
+
 ## Modern JavaScript Explained For Dinosaurs
 
 ![Dinosaurs Everywhere](img/dinosaurs.png "Logo Title Text 1")
@@ -1136,9 +1253,13 @@ Node.js is a JavaScript runtime environment. But what is that, one might ask. By
 The company itself describes Node.js as a “JavaScript runtime built on "**Chrome V8 engine**". Wikipedia states, that “Node.js is an open-source and cross-platform environment to execute code”. According to TechTarget, it is 
 "a development platform aimed at building server-side applications". And PCMag tells us that Node.js is “a platform with its own web server for better control”. That is certainly enough to grasp the main idea.
 
+**[Back to top](#table-of-contents)**
+
 ### What is NPM?
 
 **npm** is the package manager for JavaScript and the world’s largest software registry. Discover packages of reusable code — and assemble them in powerful new ways.
+
+**[Back to top](#table-of-contents)**
 
 ### NPM Tools
 
@@ -1176,6 +1297,8 @@ Another cool feature with npm (since npm 2.0.0, at least) is passing argument se
 }
 ```
 
+**[Back to top](#table-of-contents)**
+
 **NPM Config Variables**
 
 One last thing that is worth mentioning - npm has a config directive for your package.json. This lets you set arbitrary values which can be picked up as environment variables in your scripts. Here’s an example:
@@ -1189,6 +1312,8 @@ One last thing that is worth mentioning - npm has a config directive for your pa
   "test:dev": "npm run test --fooproject:reporter=spec"
 }
 ```
+
+**[Back to top](#table-of-contents)**
 
 **The Windows Problem**
 
@@ -1331,6 +1456,8 @@ The [TC39](https://github.com/tc39) categorizes proposals into the following sta
 
 [Try it out!!!!](https://babeljs.io/repl)  
 [Babel Presets Info](https://babeljs.io/docs/en/next/presets)
+
+**[Back to top](#table-of-contents)**
 
 ## Webpack
 
@@ -1560,5 +1687,7 @@ Retrieve DOM element by ID
 [TODO App - VanillaJS](http://todomvc.com/examples/vanillajs)
 
 [TODO App - Vanilla ES6](http://todomvc.com/examples/vanilla-es6)
+
+**[Back to top](#table-of-contents)**
 
 
