@@ -2,16 +2,16 @@
 
 ### Table of Contents
 
-+ [Values & Types](#values-&-types)
++ [Values & Types](#values-and-types)
 + [Coercion](#coercion)
-+ [Truthly & Falsy](#truthly-&-falsy)
++ [Truthly & Falsy](#truthly-and-falsy)
 + [Equality](#equality)
 + [Inequality](#inequality)
 + [Hoisting](#hoisting)
 + [Strict Mode](#strict-mode)
 + [Functions Scope and as Values](#functions-scope-and-as-values)
 + [Immediately Invoked Function Expressions (IIFEs)](#immediately-invoked-function-expressions-(iifes))
-+ [Closure ](#closure-)
++ [Closure](#closure)
 + [this Identifier](#this-identifier)
 + [Prototypes](#prototypes)
 + [Old & New (ES5 & ES6)](#old-&-new-(es5-&-es6))
@@ -20,7 +20,7 @@
 + [Non-Javascript](#non-javascript)
 + [ES6](#es6)
 + [Constants](#constants)
-+ [Let ](#let-)
++ [Let](#let)
 + [Arrow functions](#arrow-functions)
 + [Classes](#classes)
 + [Concise methods and Object Literals](#concise-methods-and-object-literals)
@@ -30,7 +30,7 @@
 + [Computed Property Names](#computed-property-names)
 + [Default function parameters](#default-function-parameters)
 + [Promises](#promises)
-+ [Async/await](#async/await)
++ [Async and await](#async and await)
 + [Modules on JS](#modules-on-js)
 + [Common JS](#common-js)
 + [ES6 Modules](#es6-modules)
@@ -49,7 +49,7 @@
 + [Babel](#babel)
 + [Webpack](#webpack)
 
-## Values & Types
+## Values and Types
 
 JavaScript has typed values, not typed variables. The following built-in types are available:
 
@@ -128,7 +128,7 @@ console.log(obj["b"]); // 42
 
 **[Back to top](#table-of-contents)**
 
-### Truthly & Falsy
+### Truthly and Falsy
 
 We briefly mentioned the "truthy" and "falsy" nature of values: when a non-boolean value is coerced to a boolean, does it become true or false, respectively?
 
@@ -202,7 +202,7 @@ console.log(a); // 2
 
 ES5 added a "strict mode" to the language, which tightens the rules for certain behavrios. Generally these restrictions are seen as keeping the code to a safer and more appropriate set of guidelines, Also adhering to strict mode makes your code generally more optimizable by the engine.
 
-```
+```js
 function foo(){
   "use strict";
   // this code is strict mode 
@@ -911,7 +911,7 @@ Promise.all([p1, p2, p3]).then(values => {
 ```
 **[Back to top](#table-of-contents)**
 
-## Async/await
+## Async and await
 
 There’s a special syntax to work with promises in a more comfort fashion, called “async/await”. It’s surprisingly easy to understand and use.
 
