@@ -1118,9 +1118,11 @@ console.log(getUsersData(response))
 
 ```
 
-## Nodejs
+## Modern JavaScript Explained For Dinosaurs
 
-asdf
+![alt text](img/dinosaurs.png "Logo Title Text 1")
+
+## Nodejs
 
 ### What is NodeJS?
 
@@ -1130,3 +1132,424 @@ The company itself describes Node.js as a “JavaScript runtime built on "**Chro
 "a development platform aimed at building server-side applications". And PCMag tells us that Node.js is “a platform with its own web server for better control”. That is certainly enough to grasp the main idea.
 
 ### What is NPM?
+
+**npm** is the package manager for JavaScript and the world’s largest software registry. Discover packages of reusable code — and assemble them in powerful new ways.
+
+### NPM Tools
+
+npm is gaining more and more steam as a replacement for other build tools such as Gulp, Grunt, Bower, and others. While the previously mentioned are great tools, node provides a great way to implement build processes with only npm and your package.json file. Here, we will go into an introduction to this process as well as a few key things to know about if you are looking to learn about using NPM as a build tool.
+
+Using npm as a build tool is all about working in the package.json file and creating custom scripts in the scripts object of file, so that is where we will spend most of our time.
+
+**Shortcut scripts:**
+
++ npm test
++ npm start
++ npm stop
++ npm install
++ npm uninstall
++ npm publish
++ npm update
+
+They are shortcuts for npm run `<command>`
+
+**Pre and Post Hooks:**
+
+Another cool feature about npm is that any script that can be executed also has a set of pre- and post- hooks, which are simply definable in the scripts object.
+
++ npm run prelint, npm run lint, npm run postlint
++ npm run pretest, npm run test, npm run posttest
+
+**Passing Arguments**
+
+Another cool feature with npm (since npm 2.0.0, at least) is passing argument sets through to the underlying tools. This can be a little complex, but here’s an example:
+
+```json
+"scripts": {
+  "test": "mocha test/",
+  "test:xunit": "npm run test -- --reporter xunit"
+}
+```
+
+**NPM Config Variables**
+
+One last thing that is worth mentioning - npm has a config directive for your package.json. This lets you set arbitrary values which can be picked up as environment variables in your scripts. Here’s an example:
+```json
+"name": "fooproject",
+"config": {
+  "reporter": "xunit"
+},
+"scripts": {
+  "test": "mocha test/ --reporter $npm_package_config_reporter",
+  "test:dev": "npm run test --fooproject:reporter=spec"
+}
+```
+
+**The Windows Problem**
+
+Let’s get something out of the way before we progress. Because npm is reliant on the operating systems shell to run scripts commands, they can quickly become unportable. While Linux, Solaris, BSD and Mac OSX come preinstalled with Bash as the default shell, Windows does not. On Windows, npm will resort to using Windows command prompt for these things.
+
+A good chunk of syntax that works in Bash will also work in Windows command prompt the same way:
+
++ `&&` for chaining tasks
++ `&` for running tasks simaltaneously
++ `<` for inputting the contents (stdin) of a file to a command
++ `>` for redirecting output (stdout) of a command and dumping it to a file
++ `|` for redirecting output (stdout) of a command and sending it to another 
+
+The biggest problems between the two is the availability and naming of commands (e.g. cp is COPY in Windows) and variables (Windows uses % for variables, Bash $). 
+
+**Using multiple files**
+
+```json
+"devDependencies": {
+  "jshint": "latest"
+},
+"scripts": {
+  "lint": "jshint *.js"
+}
+```
+
+**Running multiple tasks**
+
+```json
+"devDependencies": {
+  "jshint": "latest",
+  "stylus": "latest",
+  "browserify": "latest"
+},
+"scripts": {
+  "lint": "jshint **",
+  "build:css": "stylus assets/styles/main.styl > dist/main.css",
+  "build:js": "browserify assets/scripts/main.js > dist/main.js",
+  "build": "npm run build:css && npm run build:js",
+  "prebuild:js": "npm run lint"
+}
+```
+
+**Clean**
+
+```json
+"scripts": {
+  "clean": "rm -r dist/*"
+}
+```
+
+**Watch**
+
+>Nodemon is a famous watcher used for npm projects
+
+```json
+"devDependencies": {
+  "mocha": "latest",
+  "stylus": "latest"
+},
+"scripts": {
+  "test": "mocha test/",
+  "test:watch": "npm run test -- -w",
+
+  "css": "stylus assets/styles/main.styl > dist/main.css",
+  "css:watch": "npm run css -- -w"
+}
+```
+
+NPM Tools resources
+
+[Introduction to Using NPM as a Build Tool](https://medium.com/javascript-training/introduction-to-using-npm-as-a-build-tool-b41076f488b0)  
+
+[How to Use npm as a Build Tool](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)  
+
+[Simple build tools: npm scripts vs Makefile vs runjs](https://hackernoon.com/simple-build-tools-npm-scripts-vs-makefile-vs-runjs-31e578278162)
+
+
+## Babel
+
+Babel is a JavaScript compiler
+Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments. Here are the main things Babel can do for you:
+
++ Transform syntax
++ Polyfill features that are missing in your target + environment (through @babel/polyfill)
++ Source code transformations (codemods)
++ And more! (check out these videos for inspiration)
+
+**ES2015 and beyond**
+
+Babel has support for the latest version of JavaScript through syntax transformers.
+
+These plugins allow you to use new syntax, right now without waiting for browser support. Check out our usage guide to get started.
+
+**JSX and React**
+
+Babel can convert JSX syntax! Check out our React preset to get started. Use it together with the babel-sublime package to bring syntax highlighting to a whole new level.
+
+**Babel is Multiple Packages**
+
+In previous Babel versions, you’d simply install babel. Now you install separate packages:
+
++ babel-core — The core compiler. It transforms nothing out of the box. You need plugins for that (more on this below).
++ babel-cli — The command line interface. It includes three handy command line tools: babel-doctor, which checks your config, babel-node, which is useful for running babel against your Node scripts in development, and babel, which is the core CLI.
+
+**Be Sure to Polyfill**
+
+Although Babel transpiles to ES5, some ES6 features like Array.from, set, map, promise, generator functions, and many others can’t be transpiled. So if you use these, they must be polyfilled. There are three ways to handle this:
+
++ babel-polyfill
++ babel-runtime
++ Do it yourself. Pull in specific polyfills as needed.
+
+**Babel Presets**
+
+Technically presets are collections of plugins
+The usecase is the support of particular language features.
+
+A preset is a set of plugins used to support particular language features.
+
+Babel Presets:
+
++ @babel/preset-env
++ @babel/preset-flow
++ @babel/preset-react
++ @babel/preset-typescript
+
+**Preset stages**
+
+Stages represent the status of experimental features. Pre stage-3 should be used with caution.
+
+
+The [TC39](https://github.com/tc39) categorizes proposals into the following stages:
+
++ Stage 0 - Strawman: just an idea, possible Babel plugin.
++ Stage 1 - Proposal: this is worth working on.
++ Stage 2 - Draft: initial spec.
++ Stage 3 - Candidate: complete spec and initial browser implementations.
++ Stage 4 - Finished: will be added to the next yearly release.
+
+[Try it out!!!!](https://babeljs.io/repl)  
+[Babel Presets Info](https://babeljs.io/docs/en/next/presets)
+
+## Webpack
+
+What is webpack?
+
+At its simplest, webpack is a module bundler for your JavaScript. However, since its release it’s evolved into a manager of all your front-end code (either intentionally or by the community’s will).
+
+`webpack.config.js` file in the root of our project directory
+
+```js
+const path = require('path');
+const webpack = require('webpack');
+module.exports = {
+  context: path.resolve(__dirname, 'src'),
+  entry: {
+    app: './app.js',
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].bundle.js',
+  },
+};
+```
+
+VanillaJS
+
+The Vanilla JS team takes pride in the fact that it is the **most lightweight framework available anywhere**; using our production-quality deployment strategy, your users' browsers will have Vanilla JS loaded into memory before it even requests your site.
+
+To use Vanilla JS, just put the following code anywhere in your application's HTML:
+
+```html
+<script src="path/to/vanilla.js"></script>
+```
+
+When you're ready to move your application to a production deployment, switch to the much faster method:
+
+```html
+
+```
+ 
+**That's right - no code at all. Vanilla JS is so popular that browsers have been automatically loading it for over a decade.**
+
+Retrieve DOM element by ID
+
+| Framework | Code | ops/sec |
+| :---: | :---: | :---: |
+| Vanilla JS	| document.getElementById('test-table') | 12,137,211 |
+| jQuery	| $jq('#test-table');	| 350,557 |
+
+```js
+// Native selectors.
+(function(window, document) {
+	'use strict';
+
+	var noop = function() {
+	};
+
+	// DOCUMENT LOAD EVENTS
+	// not needed at the bottom of the page
+	document.addEventListener('DOMContentLoaded', noop);
+	window.onload = noop;
+
+	// SELECTORS
+	document.getElementById('id');
+	document.getElementsByClassName('some-class-name');
+	document.getElementsByTagName('a');
+	document.querySelectorAll('.class-name');
+	// only returns the first match of querySelectorAll
+	document.querySelector('.class-name');
+
+	// EACH (NODE LIST)
+
+	var nodes = document.querySelectorAll('.class-name'),
+		elements = Array.prototype.slice.call(nodes);
+
+	// 1.
+	elements.forEach(noop);
+
+	// 2. (clean, but creates a new array)
+	[].forEach.call(nodes, noop);
+
+	// 3.
+	Array.prototype.forEach.call(nodes, noop);
+
+	// 4. - jquery style!
+	function $$(selector) {
+		var nodes = document.querySelectorAll(selector);
+		return Array.prototype.slice.call(nodes);
+	}
+
+	$$('selector'); // similar to jQuery
+
+	// FIRST
+	var nodeList = document.querySelectorAll('.some-class'),
+		first = nodeList[0];
+
+	// LAST
+	var last = nodeList[nodeList.length - 1];
+
+	// InnerHTML na InnerText
+	var node = document.getElementById('my-id');
+	node.innerHTML = 'New Html!';
+	node.innerText = 'New text';
+
+	// IS A (matches - needs a polyfill in older browsers)
+	var node = document.getElementById('header-link'),
+		isAnchor = node.matches('a');
+
+	// FILTER
+	var nodeList = document.getElementsByClassName('my-class'),
+		filtered = Array.prototype.filter.call(nodeList, function(header) {
+			// filter condition
+
+			return header.innerText.indexOf('Item') !== -1;
+		});
+
+	// FIND
+	var parent = document.querySelector('.parent'),
+		children = parent.querySelectorAll('.child');
+
+	// NEXT/PREV
+	var node = document.getElementById('my-id');
+	node.nextElementSibling;
+	node.nextElementSibling;
+
+	// CLOSEST
+	var node = document.getElementById('my-id'),
+		isFound = false;
+
+	while (node instanceof Element) {
+		if (node.matches('.target-class')) {
+			isFound = true;
+			break;
+		}
+		node = node.parentNode;
+	}
+
+	// isFound and node will be populated
+
+	// prototype closest!
+	if (Element && !Element.prototype.closest) {
+		Element.prototype.closest = function(selector) {
+			var el = this;
+			while (el instanceof Element) {
+				if (el.matches(selector)) {
+					return el;
+				}
+				el = el.parentNode;
+			}
+		}
+	}
+
+	// NEW ELEMENTS
+	var heading = document.createElement('h1'),
+		target = document.getElementById('global-nav');
+
+	heading.innerText = 'HELLO WORLD!!!!';
+	document.querySelector('.my-class')
+		.insertBefore(heading, target);
+
+	// NODE PROPERTIES
+	var node = document.getElementById('my-el');
+	// style
+	node.style.backgroundColor = 'blue';
+	// attributes
+	node.getAttribute('href');
+	// properties
+	node.href;
+	node.checked;
+	node.disabled;
+	node.selected;
+
+	// MOCK EVENTS
+	var anchor = document.getElementById('my-anchor'),
+		event = new Event('click');
+	anchor.dispatchEvent(event);
+
+	// Listeners
+	var node = document.getElementById('my-node'),
+
+	// this = element
+		onClick = function(event) {
+			// can filter by target
+			if (!event.target.matches('.tab-header')) {
+				return;
+			}
+
+			// stop the default browser behaviour
+			event.preventDefault();
+
+			// stop the event from bubbling up the dom
+			event.stopPropagation();
+
+			// other listeners on this node will not fire
+			event.stopImmediatePropagation();
+		};
+
+	node.addEventListener('click', onClick);
+	node.removeEventListener('click', onClick);
+	// can also add to all by using loop
+	// can add to higher element and use 'matches' to see if specific
+	// 	child was clicked (similar to .on)
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', '/url', true);
+	xhr.onload = function() {
+		if (this.status === 200) {
+			console.log('success!');
+		} else {
+			console.log('failed', this.status);
+		}
+	};
+
+	xhr.send();
+
+	var xhrPost = new XMLHttpRequest();
+	xhrPost.open('POST', '/url/post', true);
+	xhrPost.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhrPost.onload = noop;
+	xhrPost.send();
+
+})(window, window.document);
+```
+
+[TODO App](../VanillaJS/src/index.html)  
+
+
