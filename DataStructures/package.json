@@ -1,0 +1,31 @@
+{
+  "name": "datastructures",
+  "version": "1.0.0",
+  "description": "Project to show the most common data structures and how to build them.",
+  "main": "index.js",
+  "repository": "https://Oscarz90",
+  "author": "OMS",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --require babel-core/register  ./test/**/*.test.js",
+    "init": "mkdir dist",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean && npm run init",
+    "build:single": "babel ./src/index.js -o ./dist/index.js",
+    "build": "babel src -d dist",
+    "test:single": "mocha --require babel-core/register",
+    "pretest": "npm run build",
+    "start": "npm run dev",
+    "dev": "npm test -- -w"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {}
+}
