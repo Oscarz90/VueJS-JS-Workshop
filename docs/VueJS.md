@@ -1657,7 +1657,6 @@ async searchGifs(){
     console.error(error)
   }
 }
-import * as types from '@/constants/mutation-names';
 ~~~
 
 
