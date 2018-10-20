@@ -89,7 +89,7 @@ Just follow these simple steps:
 ➜ vue create giphy-client
 ~~~  
 
-[![asciicast](https://asciinema.org/a/7pO4KuB85FZlBGK9E1aIMqtw8.png)](https://asciinema.org/a/7pO4KuB85FZlBGK9E1aIMqtw8)
+[![asciicast](https://asciinema.org/a/207556.png)](https://asciinema.org/a/207556)
 
 [PWA - Progressive Web Applications](https://naturaily.com/blog/pwa-vue-cli-3)
 
@@ -99,7 +99,7 @@ Just follow these simple steps:
 ➜ npm run serve
 ~~~
 
-[![asciicast](https://asciinema.org/a/gLOalkSD9TleUbcaug3ZFgLL6.png)](https://asciinema.org/a/gLOalkSD9TleUbcaug3ZFgLL6)
+[![asciicast](https://asciinema.org/a/YTYI6pDIYAjUEkJXf63Wpthp0.png)](https://asciinema.org/a/YTYI6pDIYAjUEkJXf63Wpthp0)
 
 **[Back to top](#table-of-contents)**
 
